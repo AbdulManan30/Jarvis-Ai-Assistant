@@ -22,7 +22,7 @@ Follow these steps to run the assistant on your machine:
 
 ### 1. Clone the repository
 
-git clone https://github.com/yourusername/jarvis-ai-assistant.git
+git clone https://github.com/AbdulManan30/Jarvis-Ai-Assistant.git
 cd jarvis-ai-assistant
 
 ### 2. Create a virtual environment
