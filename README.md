@@ -13,8 +13,7 @@ It listens for the keyword `"Jarvis"` and responds smartly using voice.
 - 📰 Fetch top 15 news headlines and read them aloud
 - 🎵 Play music by name (from YouTube links)
 - 🌐 Open websites by saying “Open YouTube”, “Open Google”, etc.
-- 🎧 Text-to-speech powered by ElevenLabs API (with realistic voices)
-
+- 🎧 Text-to-speech powered by gTTS (Google Text-to-Speech)
 ---
 
 ## ⚙️ Installation
