@@ -64,15 +64,6 @@ Read news → reads headlines
 Open github → opens GitHub in browser
 Jarvis listens, processes your command, and replies using gtts voice output.
 
-### 7. 📦 Project Structure
-📁 jarvis-ai-assistant/
-├── main.py<br/>              # Main assistant script
-├── client.py<br/>            # Groq integration
-├── musicLibrary.py<br/>      # Music links dictionary
-├── .venv/<br/>               # Python virtual environment
-├── README.md<br/>            # This file
-└── requirements.txt<br/>     # All dependencies
-
 📝 License
 This project is for educational purposes only.
 APIs used are subject to their individual license agreements (Groq, NewsAPI).
