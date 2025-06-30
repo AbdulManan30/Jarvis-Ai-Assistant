@@ -29,7 +29,7 @@ cd jarvis-ai-assistant
 
 python3 -m venv .venv
 source .venv/bin/activate     # For Linux/macOS
-# OR
+### OR
 .venv\Scripts\activate        # For Windows
 
 ### 3. Install dependencies
@@ -47,10 +47,10 @@ pip install -r requirements.txt
 ### 5. Replace in code:
 Update these lines with your actual keys:
 
-# For News API
+### For News API
 api_key = "YOUR-NEWSAPI-KEY"
 
-# For Groq
+### For Groq
 client = Groq(api_key="YOUR-GROQ-KEY")
 
 ### 6. Example Usage
