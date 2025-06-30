@@ -4,8 +4,6 @@
 
 It listens for the keyword `"Jarvis"` and responds smartly using voice.
 
-![Jarvis Assistant](https://media.giphy.com/media/N1KCbQ07mGJRXnJ34m/giphy.gif)
-
 ---
 
 ## 🧩 Features
