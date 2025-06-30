@@ -6,6 +6,9 @@ from gtts import gTTS
 import pygame
 import sys
 import contextlib
+import musicLibrary
+import requests
+from client import groqAi
 
 
 # Error suppression function
@@ -39,21 +42,59 @@ def speak(text):
     os.remove("sound.mp3")
 
 
+def getNews():
+    api_key = "Your Api Key"
+    url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey={api_key}"
+    response = requests.get(url)
+
+    # Convert to JSON
+    data = response.json()
+
+    # Check for errors
+    if data["status"] == "ok":
+        articles = data["articles"]
+        for i, article in enumerate(articles[:15], start=1):  # Show top 15 news]
+            speak(article["title"])
+    else:
+        print("❌ Failed to fetch news:", data["message"])
+
+
+def processCommand(c):
+    if "open" in c.lower():
+        webbrowser.open(f'https://{c.split(" ")[1]}.com')
+    elif c.lower().startswith("play"):
+        song = c.lower().split(" ")[1]
+        link = musicLibrary.music[song]
+        webbrowser.open(link)
+    elif "news" in c.lower():
+        getNews()
+    else:
+        # let groqAI handle the request
+        response = groqAi(c)
+        speak(response)
+
+
 if __name__ == "__main__":
-    speak("eldric is online")
+    speak("Hi Sir Manan, Jarvis is activated")
     while True:
         with sr.Microphone() as source:
             print("🎙️ Listening...")
-            audio = recognizer.listen(source, timeout=1)
+            audio = recognizer.listen(source)
 
         try:
-            text = recognizer.recognize_google(audio)
-            print("✅ You said:", text)
-            if "eldric" in text.lower():
-                speak(f"You said: {text}")
-        except sr.UnknownValueError:
-            print("❌ Could not understand audio")
-            speak("Sorry, I could not understand that.")
-        except sr.RequestError:
-            print("❌ Google API error")
-            speak("Network error while accessing Google API.")
+            with sr.Microphone() as source:
+                print("🎙️ Listening...")
+                audio = recognizer.listen(source, phrase_time_limit=1)
+            word = recognizer.recognize_google(audio)
+            print("✅ You said:", word)
+            if word.lower() == "jarvis":
+                speak("Yes")
+                # Listen for a command
+                with sr.Microphone() as source:
+                    print("🎙️ Listening...")
+                    audio = recognizer.listen(source, phrase_time_limit=1)
+                    command = recognizer.recognize_google(audio)
+                    processCommand(command)
+
+        except Exception as e:
+            speak("Sorry , I didn't catch that, can you repeat?")
