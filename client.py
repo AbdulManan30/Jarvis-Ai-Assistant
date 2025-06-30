@@ -1,7 +1,7 @@
 from groq import Groq
 
 def groqAi(question):
-    client = Groq(api_key="You Api Key")  # Replace with your key
+    client = Groq(api_key="Your Api Key")  # Replace with your key
 
     completion = client.chat.completions.create(
         model="meta-llama/llama-4-scout-17b-16e-instruct",
