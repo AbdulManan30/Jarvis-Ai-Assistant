@@ -6,9 +6,12 @@ from gtts import gTTS  # Google Text-to-Speech library to convert text into audi
 import pygame  # Used to play audio files
 import musicLibrary  # Custom module that contains a dictionary of music links
 import requests  # To make HTTP requests (used for fetching news)
-from client import groqAi  # Custom function that interacts with Groq AI for generating responses
+from client import (
+    groqAi,
+)  # Custom function that interacts with Groq AI for generating responses
 
 recognizer = sr.Recognizer()  # Create a recognizer object to handle speech input
+
 
 # Function to convert text to speech and play it
 def speak(text):
@@ -18,12 +21,13 @@ def speak(text):
     pygame.init()  # Initialize pygame
     pygame.mixer.init()  # Initialize the mixer for audio playback
 
-    pygame.mixer.music.load("sound.mp3")  # Load the mp3 file
+    pygame.mixer.music.load('sound.mp3')  # Load the mp3 file
     pygame.mixer.music.play()  # Play the loaded audio
 
     while pygame.mixer.music.get_busy():
         pass  # Wait until the audio playback is complete
     os.remove("sound.mp3")  # Delete the audio file after playback
+
 
 # Function to fetch and speak the latest news headlines
 def getNews():
@@ -35,15 +39,22 @@ def getNews():
 
     if data["status"] == "ok":  # If the request was successful
         articles = data["articles"]  # Get the list of articles
-        for i, article in enumerate(articles[:15], start=1):  # Loop through top 15 articles
+        for i, article in enumerate(
+            articles[:15], start=1
+        ):  # Loop through top 15 articles
             speak(article["title"])  # Speak out the title of each article
     else:
-        print("Failed to fetch news:", data["message"])  # Print the error message if request fails
+        print(
+            "Failed to fetch news:", data["message"]
+        )  # Print the error message if request fails
+
 
 # Function to process user commands and take appropriate action
 def processCommand(c):
     if "open" in c.lower():  # If the command includes 'open'
-        webbrowser.open(f'https://{c.split(" ")[1]}.com')  # Open the second word as a website
+        webbrowser.open(
+            f'https://{c.split(" ")[1]}.com'
+        )  # Open the second word as a website
     elif c.lower().startswith("play"):  # If the command starts with 'play'
         song = c.lower().split(" ")[1]  # Get the name of the song
         link = musicLibrary.music[song]  # Retrieve the song link from the music library
@@ -53,6 +64,7 @@ def processCommand(c):
     else:
         response = groqAi(c)  # Send the command to Groq AI to get a response
         speak(response)  # Speak the response received from the AI
+
 
 # Main block that starts the program
 if __name__ == "__main__":
@@ -74,8 +86,12 @@ if __name__ == "__main__":
                 with sr.Microphone() as source:
                     print("Listening...")
                     audio = recognizer.listen(source)  # Listen again for full command
-                    command = recognizer.recognize_google(audio)  # Convert command to text
+                    command = recognizer.recognize_google(
+                        audio
+                    )  # Convert command to text
                     processCommand(command)  # Handle the command accordingly
 
         except Exception as e:  # Handle any recognition or microphone errors
-            speak("Sorry , I didn't catch that, can you repeat?")  # Respond with an error message
+            speak(
+                "Sorry , I didn't catch that, can you repeat?"
+            )  # Respond with an error message
