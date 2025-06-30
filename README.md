@@ -1,6 +1,6 @@
 # 🤖 Jarvis AI Assistant
 
-**Jarvis** is a Python-based voice assistant that performs tasks based on your speech commands. Powered by **speech recognition**, **ElevenLabs realistic voices**, **Groq AI for natural language replies**, and **live news updates**, Jarvis acts like your personal AI companion — just like Iron Man's assistant!
+**Jarvis** is a Python-based voice assistant that performs tasks based on your speech commands. Powered by **speech recognition**, **gtts voices**, **Groq AI for natural language replies**, and **live news updates**, Jarvis acts like your personal AI companion — just like Iron Man's assistant!
 
 It listens for the keyword `"Jarvis"` and responds smartly using voice.
 
