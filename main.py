@@ -6,12 +6,9 @@ from gtts import gTTS  # Google Text-to-Speech library to convert text into audi
 import pygame  # Used to play audio files
 import musicLibrary  # Custom module that contains a dictionary of music links
 import requests  # To make HTTP requests (used for fetching news)
-from client import (
-    groqAi,
-)  # Custom function that interacts with Groq AI for generating responses
+from client import (groqAi)  # Custom function that interacts with Groq AI for generating responses
 
 recognizer = sr.Recognizer()  # Create a recognizer object to handle speech input
-
 
 # Function to convert text to speech and play it
 def speak(text):
