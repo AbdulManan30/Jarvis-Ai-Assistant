@@ -6,9 +6,12 @@ from gtts import gTTS  # Google Text-to-Speech library to convert text into audi
 import pygame  # Used to play audio files
 import musicLibrary  # Custom module that contains a dictionary of music links
 import requests  # To make HTTP requests (used for fetching news)
-from client import (groqAi)  # Custom function that interacts with Groq AI for generating responses
+from client import (
+    groqAi,
+)  # Custom function that interacts with Groq AI for generating responses
 
 recognizer = sr.Recognizer()  # Create a recognizer object to handle speech input
+
 
 # Function to convert text to speech and play it
 def speak(text):
@@ -18,7 +21,7 @@ def speak(text):
     pygame.init()  # Initialize pygame
     pygame.mixer.init()  # Initialize the mixer for audio playback
 
-    pygame.mixer.music.load('sound.mp3')  # Load the mp3 file
+    pygame.mixer.music.load("sound.mp3")  # Load the mp3 file
     pygame.mixer.music.play()  # Play the loaded audio
 
     while pygame.mixer.music.get_busy():
@@ -64,31 +67,43 @@ def processCommand(c):
 
 
 # Main block that starts the program
+# Entry point of the program
 if __name__ == "__main__":
-    speak("Hi Sir Manan, Jarvis is activated")  # Initial welcome message
-    while True:  # Run continuously
-        with sr.Microphone() as source:  # Use the microphone as the input source
-            print("Listening...")
-            audio = recognizer.listen(source)  # Listen for any speech input
+    speak(
+        "Hi Sir Manan, Jarvis is activated"
+    )  # Speak a welcome message when the assistant starts
 
+    while True:  # Run the assistant continuously
         try:
-            with sr.Microphone() as source:  # Use the mic again to detect wake word
-                print("Listening...")
-                audio = recognizer.listen(source)  # Capture the audio
-            word = recognizer.recognize_google(audio)  # Convert audio to text
-            if word.lower() == "jarvis":  # If the word "jarvis" is detected
-                speak("Yes")  # Respond verbally
+            # Use the microphone as the input source
+            with sr.Microphone() as source:
+                recognizer.adjust_for_ambient_noise(
+                    source
+                )  # Adjust for background noise
+                print(
+                    "Listening for wake word..."
+                )  # Prompt for the wake word (e.g., "Jarvis")
+                audio = recognizer.listen(source)  # Listen to the microphone
+                wake = recognizer.recognize_google(audio)  # Convert speech to text
 
-                # Listen for the actual user command
-                with sr.Microphone() as source:
-                    print("Listening...")
-                    audio = recognizer.listen(source)  # Listen again for full command
+                if "jarvis" in wake.lower():  # If the wake word "jarvis" is detected
+                    speak("Yes Sir")  # Respond with a confirmation
+                    print(
+                        "Listening for your command..."
+                    )  # Prompt for the actual command
+                    audio = recognizer.listen(
+                        source
+                    )  # Listen again for the user's command
                     command = recognizer.recognize_google(
                         audio
-                    )  # Convert command to text
-                    processCommand(command)  # Handle the command accordingly
+                    )  # Convert command speech to text
+                    print("Command received:", command)  # Print the recognized command
+                    processCommand(
+                        command
+                    )  # Process the command with appropriate logic
 
-        except Exception as e:  # Handle any recognition or microphone errors
+        except Exception as e:
+            print("Error:", str(e))  # Print the error for debugging
             speak(
-                "Sorry , I didn't catch that, can you repeat?"
-            )  # Respond with an error message
+                "Sorry, I didn't catch that."
+            )  # Respond if there was an error in recognition

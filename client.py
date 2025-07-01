@@ -6,7 +6,7 @@ def groqAi(question):
     completion = client.chat.completions.create(
         model="meta-llama/llama-4-scout-17b-16e-instruct",
         messages=[
-            {"role": "system", "content": "You are a virtual assistant that give short answers, named Jarvis skilled in general tasks like Alexa and Google Cloud"},
+            {"role": "system", "content": "You are Jarvis, a virtual assistant that gives short, clear answers. Respond like Alexa or Google Assistant."},
             {"role": "user", "content": question}
         ],
         temperature=1,
