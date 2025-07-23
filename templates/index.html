@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jarvis AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Jarvis 🧠 Your own AI Assistant</h1>
+    
+    <!-- Robot Image -->
+    <img src="{{ url_for('static', filename='robote.png') }}" alt="Robot Icon" class="robot-image">
+
+    <!-- Activate Button -->
+    <button id="activateBtn">
+      <span>🎙️ Activate Jarvis</span>
+    </button>
+
+    <!-- Wave Visualizer -->
+    <div class="wave" id="wave">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <!-- Optional Status Text -->
+    <p id="status">Status: Standby</p>
+  </div>
+<script>
+        document.getElementById("activateBtn").addEventListener("click", () => {
+            fetch("/run-jarvis", { method: "POST" })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("status").textContent = data.message;
+            });
+
+            const eventSource = new EventSource("/events");
+            eventSource.onmessage = function(event) {
+            document.getElementById("status").textContent = event.data;
+
+            // Optional: toggle wave animation
+            const wave = document.getElementById("wave");
+            if (event.data.toLowerCase().includes("listening")) {
+                wave.classList.add("listening");
+            } else {
+                wave.classList.remove("listening");
+            }
+            };
+        });
+</script>
+</body>
+</html>
