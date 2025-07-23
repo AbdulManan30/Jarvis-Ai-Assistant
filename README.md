@@ -39,19 +39,27 @@ Follow these steps to run the assistant on your machine:
 
 ### 1. Clone the repository
 
+```
 git clone https://github.com/AbdulManan30/Jarvis-Ai-Assistant.git
 cd jarvis-ai-assistant
+```
 
 ### 2. Create a virtual environment
 
+```
 python3 -m venv .venv
 source .venv/bin/activate     # For Linux/macOS
+```
 ### OR
+```
 .venv\Scripts\activate        # For Windows
+```
 
 ### 3. Install dependencies
 
+```
 pip install -r requirements.txt
+```
 
 
 ### 4. 🔑 API Keys Required
@@ -71,7 +79,9 @@ api_key = "YOUR-NEWSAPI-KEY"
 client = Groq(api_key="YOUR-GROQ-KEY")
 
 ### 6. Example Usage
+```
 python main.py
+```
 
 Then say:
 Jarvis → wakes the assistant
