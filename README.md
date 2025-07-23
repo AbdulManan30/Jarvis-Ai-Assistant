@@ -1,19 +1,36 @@
 # 🤖 Jarvis AI Assistant
 
-**Jarvis** is a Python-based voice assistant that performs tasks based on your speech commands. Powered by **speech recognition**, **gtts voices**, **Groq AI for natural language replies**, and **live news updates**, Jarvis acts like your personal AI companion — just like Iron Man's assistant!
-
-It listens for the keyword `"Jarvis"` and responds smartly using voice.
+A voice-activated AI assistant built using Python, Flask, and speech recognition libraries. Jarvis listens to your voice commands and performs actions like opening apps, playing music, reading news, and interacting with AI (via Groq API).
 
 ---
 
-## 🧩 Features
+## 🚀 Features
 
-- 🗣️ Wake word detection: Say “Jarvis” to activate
-- 🔍 Ask any question and get a spoken reply via Groq LLaMA models
-- 📰 Fetch top 15 news headlines and read them aloud
-- 🎵 Play music by name (from YouTube links)
-- 🌐 Open websites by saying “Open YouTube”, “Open Google”, etc.
-- 🎧 Text-to-speech powered by gTTS (Google Text-to-Speech)
+- 🎤 Wake word detection (say “Jarvis” to activate)
+- 💬 Converts speech to text and vice versa
+- 🌐 Opens websites and desktop applications
+- 📁 Opens folders like Downloads, Documents, Music, etc.
+- 🔉 Controls system volume (up, down, mute)
+- 📰 Speaks latest news headlines (using News API)
+- 🎵 Plays songs using predefined YouTube links
+- 🧠 Responds to custom queries using Groq AI
+- 🖥️ Web interface using Flask with dark UI and wave effects
+- 
+---
+
+## 📁 Folder Structure
+```
+Jarvis-Ai-Assistant/
+├── app.py / main.py # Flask app & assistant logic
+├── process_command.py # Handles voice command execution
+├── musicLibrary.py # Custom music links
+├── templates/
+│ └── index.html # Frontend page
+├── static/
+│ └── styles.css # Wave animation & dark theme
+└── README.md
+```
+
 ---
 
 ## ⚙️ Installation
@@ -67,6 +84,12 @@ Jarvis listens, processes your command, and replies using gtts voice output.
 📝 License
 This project is for educational purposes only.
 APIs used are subject to their individual license agreements (Groq, NewsAPI).
+
+🙋‍♂️ About Me
+Abdul Manan
+💻 Frontend Developer & Python Enthusiast
+📧 Contact: abdul.manan232332@gmail.com
+🌐 GitHub: https://github.com/AbdulManan30
 
 ### Thanks for visiting.
 
